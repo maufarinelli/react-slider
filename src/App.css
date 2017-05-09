@@ -1,0 +1,28 @@
+.slider-viewport {
+  position: relative;
+}
+
+.slider-viewport .arrow-left,
+.slider-viewport .arrow-right {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 0;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+.slider-viewport .arrow-right {
+  left: auto;
+  right: 0;
+}
+
+.slider-viewport ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+}
