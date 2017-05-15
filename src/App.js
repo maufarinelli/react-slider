@@ -1,36 +1,47 @@
 import React, { Component } from 'react';
+const _ = require('lodash');
 import { SliderButton } from './slider-button/slider-button';
 import './App.css';
 
 class App extends Component {
-	constructor(props) {
-	  super(props);
-	  //this.photos = this.props.photos;
-	  //console.log('PHOTOS', this.photos);
-  }
-
   render() {
     return (
       <div className="slider">
        <div className="slider-viewport">
-         <SliderButton side="left" />
-         <SliderButton side="right" />
          <ul>
-           {this.props.photos.map((photo) => {
+           {this.props.photos.map((photo, key) => {
              return (
-               <li>
+               <li key={photo.name} className="slider-photo">
                  <img src={photo.url} />
                </li>
              );
            }) }
-           <li>
-             <img src="https://unsplash.it/1920/450/" />
-           </li>
          </ul>
+         <SliderButton side="left" />
+         <SliderButton side="right" />
        </div>
       </div>
     );
   }
+
+	componentDidMount() {
+		var self = this;
+
+		setTimeout(function() {
+			self.sliderHeight = self.getHeight();
+			self.setSliderHeight();
+		}, 500);
+	}
+
+	getHeight() {
+    let firstPhotoHeight = _.head(document.querySelectorAll('.slider-photo img')).offsetHeight;
+    return firstPhotoHeight + "px";
+  }
+
+  setSliderHeight() {
+		let viewport = document.querySelector('.slider-viewport');
+		viewport.style.height = this.sliderHeight;
+	}
 }
 
 export default App;

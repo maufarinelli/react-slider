@@ -2,19 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
+import beachImage from './assets/img/beach.jpg';
 
 const photosList = [
 	{
 		alt: '',
-		url: 'https://unsplash.it/1920/450/'
+		url: beachImage
 	},
 	{
 		alt: '',
-		url: 'https://unsplash.it/1920/450/'
+		url: beachImage
 	},
 	{
 		alt: '',
-		url: 'https://unsplash.it/1920/450/'
+		url: beachImage
 	},
 ];
 
