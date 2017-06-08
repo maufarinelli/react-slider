@@ -6,15 +6,18 @@ import beachImage from './assets/img/beach.jpg';
 
 const photosList = [
 	{
-		alt: '',
+		id: 1,
+		alt: 'image 1',
 		url: beachImage
 	},
 	{
-		alt: '',
+		id: 2,
+		alt: 'image 2',
 		url: beachImage
 	},
 	{
-		alt: '',
+		id: 3,
+		alt: 'image 3',
 		url: beachImage
 	},
 ];
