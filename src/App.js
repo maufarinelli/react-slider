@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 const _ = require('lodash');
 import { SliderButton } from './slider-button/slider-button';
+import { ImageListItem } from './image-list-item/image-list-item';
 import './App.css';
 
 class App extends Component {
@@ -17,20 +18,8 @@ class App extends Component {
       <div className="slider">
        <div className="slider-viewport">
          <ul>
-           {this.props.photos.map((photo, key) => {
-						 if(photo.id == this.state.currentPhoto.id) {
-							 return (
-								 <li key={photo.id} className="slider-photo current">
-									 <img src={photo.url} alt={photo.alt} />
-								 </li>
-							 );
-						 } else {
-							 return (
-								 <li key={photo.id} className="slider-photo">
-									 <img src={photo.url} alt={photo.alt} />
-								 </li>
-							 );
-						 }
+           { this.props.photos.map((photo, key) => {
+						 return <ImageListItem photo={photo} isCurrentPhoto={this.state.currentPhoto.id === photo.id} />
            }) }
          </ul>
          <SliderButton side="left" moveToPrev={this.moveToPrev} />
@@ -68,14 +57,14 @@ class App extends Component {
 		var index = _.findIndex(this.props.photos, this.state.currentPhoto),
 			lastIndex = this.props.photos.length - 1;
 
-		this.state.currentPhoto = index === lastIndex ? _.head(this.props.photos) : this.props.photos[index + 1];
+		index === lastIndex ? this.setState({currentPhoto: _.head(this.props.photos)}) : this.setState({currentPhoto: this.props.photos[index + 1]});
 	}
 
 	moveToNext() {
 		var index = _.findIndex(this.props.photos, this.state.currentPhoto),
 			lastIndex = this.props.photos.length - 1;
 
-		this.state.currentPhoto = index === 0 ? this.props.photos[lastIndex] : this.props.photos[index - 1];
+		index === 0 ? this.setState({currentPhoto: this.props.photos[lastIndex]}) : this.setState({currentPhoto: this.props.photos[index - 1]});
 	}
 }
 

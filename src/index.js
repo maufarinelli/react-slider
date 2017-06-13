@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import beachImage from './assets/img/beach.jpg';
+import lakeImage from './assets/img/lake.jpg';
+import istaImage from './assets/img/ista.jpg';
 
 const photosList = [
 	{
@@ -13,12 +15,12 @@ const photosList = [
 	{
 		id: 2,
 		alt: 'image 2',
-		url: beachImage
+		url: lakeImage
 	},
 	{
 		id: 3,
 		alt: 'image 3',
-		url: beachImage
+		url: istaImage
 	},
 ];
 
