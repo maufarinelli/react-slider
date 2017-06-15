@@ -7,7 +7,11 @@ import './App.css';
 class App extends Component {
 	constructor(props, state) {
 		super(props);
-		this.state = {currentPhoto: _.head(this.props.photos)};
+		this.state = {
+			previousPhoto: _.last(this.props.photos),
+			currentPhoto: _.head(this.props.photos),
+			nextPhoto: this.props.photos[1]
+		};
 
 		this.moveToPrev = this.moveToPrev.bind(this);
 		this.moveToNext = this.moveToNext.bind(this);
@@ -19,7 +23,10 @@ class App extends Component {
        <div className="slider-viewport">
          <ul>
            { this.props.photos.map((photo, key) => {
-						 return <ImageListItem photo={photo} isCurrentPhoto={this.state.currentPhoto.id === photo.id} />
+						 return <ImageListItem photo={photo}
+																	 isCurrentPhoto={this.state.currentPhoto.id === photo.id}
+																	 isPreviousPhoto={this.state.previousPhoto.id === photo.id}
+																	 isNextPhoto={this.state.nextPhoto.id === photo.id} />
            }) }
          </ul>
          <SliderButton side="left" moveToPrev={this.moveToPrev} />
@@ -40,7 +47,7 @@ class App extends Component {
 	onWindowRezise() {
   	window.addEventListener('resize', () => {
 			this.setSliderHeight(this.getHeight());
-		})
+		});
 	}
 
 	getHeight() {
@@ -57,14 +64,38 @@ class App extends Component {
 		var index = _.findIndex(this.props.photos, this.state.currentPhoto),
 			lastIndex = this.props.photos.length - 1;
 
-		index === lastIndex ? this.setState({currentPhoto: _.head(this.props.photos)}) : this.setState({currentPhoto: this.props.photos[index + 1]});
+		index === 0 ?
+			this.setState({
+				previousPhoto: this.props.photos[lastIndex - 1],
+				currentPhoto: this.props.photos[lastIndex],
+				nextPhoto: _.head(this.props.photos)
+			}) :
+			this.setState({
+				previousPhoto: index - 1 === 0 ? this.props.photos[lastIndex] : this.props.photos[index - 2],
+				currentPhoto: this.props.photos[index - 1],
+				nextPhoto: this.props.photos[index]
+			});
+
+			console.log(this.state);
 	}
 
 	moveToNext() {
 		var index = _.findIndex(this.props.photos, this.state.currentPhoto),
 			lastIndex = this.props.photos.length - 1;
 
-		index === 0 ? this.setState({currentPhoto: this.props.photos[lastIndex]}) : this.setState({currentPhoto: this.props.photos[index - 1]});
+		index === lastIndex ?
+			this.setState({
+				previousPhoto: this.props.photos[lastIndex],
+				currentPhoto: _.head(this.props.photos),
+				nextPhoto: this.props.photos[1]
+			}) :
+			this.setState({
+				previousPhoto: this.props.photos[index],
+				currentPhoto: this.props.photos[index + 1],
+				nextPhoto: index + 1 === lastIndex ? _.head(this.props.photos) : this.props.photos[index + 2]
+			});
+
+		console.log(this.state);
 	}
 }
 

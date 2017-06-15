@@ -33,12 +33,22 @@
 
 .slider-photo {
   z-index: 1;
-  transform: translateX(- 1920px);
+  transform: translateX(0);
 
-  transition: all 0.5s;
+  transition: all 1s;
 }
 
 .slider-photo.current {
   z-index: 10;
   transform: translateX(0);
+}
+
+.slider-photo.previous {
+  z-index: 1;
+  transform: translateX(-1920px);
+}
+
+.slider-photo.next {
+  z-index: 1;
+  transform: translateX(1920px);
 }

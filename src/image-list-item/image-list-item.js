@@ -3,25 +3,37 @@ import React, { Component } from 'react';
 export class ImageListItem extends Component {
 	constructor(props) {
 		super(props);
-		// this.isCurrentPhoto = this.props.isCurrentPhoto
 	}
 
 	render() {
-		console.log('props', this.props.isCurrentPhoto);
+		if(this.props.isCurrentPhoto) {
+			return (
+				<li key={this.props.photo.id} className="slider-photo current">
+					<img src={this.props.photo.url} alt={this.props.photo.alt} />
+				</li>
+			);
+		}
+		else if(this.props.isPreviousPhoto) {
+			return (
+				<li key={this.props.photo.id} className="slider-photo previous">
+					<img src={this.props.photo.url} alt={this.props.photo.alt} />
+				</li>
+			);
+		}
+		else if(this.props.isNextPhoto) {
+			return (
+				<li key={this.props.photo.id} className="slider-photo next">
+					<img src={this.props.photo.url} alt={this.props.photo.alt} />
+				</li>
+			);
+		}
+		else {
+			return (
+				<li key={this.props.photo.id} className="slider-photo">
+					<img src={this.props.photo.url} alt={this.props.photo.alt} />
+				</li>
+			);
+		}
 
-		return (
-			<li key={this.props.photo.id} className={this.props.isCurrentPhoto ? 'slider-photo current' : 'slider-photo'}>
-				<img src={this.props.photo.url} alt={this.props.photo.alt} />
-			</li>
-		);
 	}
-
-	// componentWillUpdate(nextProps, nextState) {
-	// 	console.log('componentWillUpdate : ', nextProps);
-	// 	this.isCurrentPhoto = nextProps.isCurrentPhoto;
-	// }
-	//
-	// componentDidUpdate(prevProps, prevState) {
-	// 	console.log('componentDidUpdate : ', prevProps);
-	// }
 }
